@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>For Tiya 💖</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: "Quicksand", sans-serif;
+      background: linear-gradient(135deg, #ffd1dc, #c2e9fb);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    /* Floating hearts */
+    .heart {
+      position: fixed;
+      bottom: -20px;
+      font-size: 20px;
+      animation: floatUp 8s linear infinite;
+      opacity: 0.7;
+      pointer-events: none;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0) scale(1); opacity: 0; }
+      10% { opacity: 0.8; }
+      100% { transform: translateY(-110vh) scale(1.4); opacity: 0; }
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(8px);
+      padding: 34px;
+      border-radius: 30px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.18);
+      max-width: 90%;
+      width: 380px;
+      animation: fadeIn 0.6s ease;
+      position: relative;
+      z-index: 10;
+    }
+
+    h1 {
+      font-size: 1.7rem;
+      margin-bottom: 16px;
+      font-weight: 700;
+    }
+
+    p {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      font-weight: 500;
+    }
+
+    button {
+      margin-top: 22px;
+      padding: 13px 30px;
+      border: none;
+      border-radius: 999px;
+      font-size: 1rem;
+      cursor: pointer;
+      font-family: "Quicksand", sans-serif;
+      transition: all 0.25s ease;
+    }
+
+    .yes {
+      background: linear-gradient(135deg, #ff6f91, #ff9671);
+      color: white;
+      box-shadow: 0 8px 20px rgba(255, 111, 145, 0.4);
+    }
+
+    .yes:hover {
+      transform: scale(1.1);
+      box-shadow: 0 12px 28px rgba(255, 111, 145, 0.6);
+    }
+
+    .no {
+      background: #f3f3f3;
+      color: #555;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+      position: absolute;
+    }
+
+    .no:hover {
+      background: #eaeaea;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 18px;
+      justify-content: center;
+      margin-top: 26px;
+      position: relative;
+      height: 60px;
+    }
+
+    .celebrate {
+      font-size: 2rem;
+      animation: pop 0.6s ease;
+      font-weight: 700;
+    }
+
+    .reaction {
+      font-size: 1.2rem;
+      margin-top: 14px;
+      color: #ff6f91;
+      font-weight: 700;
+      animation: pop 0.4s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes pop {
+      0% { transform: scale(0.7); opacity: 0; }
+      60% { transform: scale(1.15); opacity: 1; }
+      100% { transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card" id="card">
+    <h1>My annoying exasperating irksome tiyuu 😘</h1>
+    <button class="yes" onclick="next1()">Next ➡️</button>
+  </div>
+
+  <script>
+    const card = document.getElementById("card");
+    const noMessages = ["ACHA?", "OUCH", "FIRSE SOCH LE", "FINE"];
+    let noIndex = 0;
+    let yesScale = 1;
+
+    // Floating hearts generator
+    setInterval(() => {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.innerText = "💖";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = 14 + Math.random() * 20 + "px";
+      heart.style.animationDuration = 6 + Math.random() * 4 + "s";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 9000);
+    }, 600);
+
+    function next1() {
+      card.innerHTML = `
+        <p>
+          tiyaa you don’t know how much i lovee youu, it would’ve been so empty without you,
+          you’re the only person with whom i have shared my everything so you’re very special to me.
+          Thanks for coming into my life and i hope you never leave. I LOVE YOU SMM 😘
+        </p>
+        <button class="yes" onclick="next2()">Next ➡️</button>
+      `;
+    }
+
+    function next2() {
+      card.innerHTML = `
+        <h1>Will u be my valentine tiya? 💘</h1>
+        <div class="buttons" id="buttonArea">
+          <button class="yes" id="yesBtn" onclick="yesClick()">Yes 💖</button>
+          <button class="no" id="noBtn">No 😏</button>
+        </div>
+        <div id="reactionArea"></div>
+      `;
+
+      const noBtn = document.getElementById("noBtn");
+      noBtn.addEventListener("mouseenter", moveNoButton);
+      noBtn.addEventListener("click", noClick);
+    }
+
+    function moveNoButton() {
+      const noBtn = document.getElementById("noBtn");
+      const area = document.getElementById("buttonArea");
+
+      const areaWidth = area.offsetWidth;
+      const areaHeight = area.offsetHeight;
+
+      const randomX = Math.random() * (areaWidth - noBtn.offsetWidth);
+      const randomY = Math.random() * (areaHeight - noBtn.offsetHeight);
+
+      noBtn.style.left = randomX + "px";
+      noBtn.style.top = randomY + "px";
+    }
+
+    function noClick() {
+      const reactionArea = document.getElementById("reactionArea");
+      const message = noMessages[noIndex % noMessages.length];
+      noIndex++;
+
+      reactionArea.innerHTML = `<div class="reaction">${message}</div>`;
+      moveNoButton();
+      growYesButton();
+    }
+
+    function growYesButton() {
+      const yesBtn = document.getElementById("yesBtn");
+      yesScale += 0.15;
+      yesBtn.style.transform = `scale(${yesScale})`;
+    }
+
+    function yesClick() {
+      card.innerHTML = `
+        <div class="celebrate">🎉💖 YAYYY!!! 💖🎉</div>
+        <p>You just made my heart sooo happy 🥰</p>
+        <button class="yes" onclick="next3()">Next ➡️</button>
+      `;
+    }
+
+    function next3() {
+      card.innerHTML = `
+        <p>
+          there’s no need for me to ask you this tho you’re already my valentine right? RIGHT?
+          but i hope it brought a smile to your face 💕
+        </p>
+        <div class="celebrate">😊💗</div>
+      `;
+    }
+  </script>
+
+</body>
+</html>
